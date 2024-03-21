@@ -1,0 +1,14 @@
+<mvc:View
+    controllerName="books.ext.main.controller.Author"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:macros="sap.fe.macros">
+    <Page title="{name}">
+        <Panel>
+            <macros:Table
+                id="idNewTable"
+                metaPath="to_books/@com.sap.vocabularies.UI.v1.LineItem"
+                contextPath="/Books" />
+        </Panel>
+    </Page>
+</mvc:View>

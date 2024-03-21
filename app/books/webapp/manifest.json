@@ -1,0 +1,167 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "books",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:fpm",
+      "version": "1.12.5",
+      "toolsId": "116b9db0-d3a8-434f-86b0-15b988d4e3b3"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.121.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "books.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "name": "BooksMain",
+          "pattern": ":?query:",
+          "target": "BooksMain"
+        },
+        {
+          "name": "BooksAuthors",
+          "pattern": "Authors:?query:",
+          "target": "BooksAuthors"
+        },
+        {
+          "name": "BooksBookPage",
+          "pattern": "Books({BooksKey}):?query:",
+          "target": "BooksBookPage"
+        },
+        {
+          "name": "BooksAuthorPage",
+          "pattern": "Authors({AuthorsKey}):?query:",
+          "target": "BooksAuthorPage"
+        }
+      ],
+      "targets": {
+        "BooksMain": {
+          "type": "Component",
+          "id": "BooksMain",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "viewName": "books.ext.main.view.Main",
+              "contextPath": "/Books",
+              "navigation": {
+                "Books": {
+                  "detail": {
+                    "route": "BooksBookPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BooksAuthors": {
+          "type": "Component",
+          "id": "BooksAuthors",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "viewName": "books.ext.main.view.Authors",
+              "contextPath": "/Authors",
+              "navigation": {
+                "Authors": {
+                  "detail": {
+                    "route": "BooksAuthorPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BooksBookPage": {
+          "type": "Component",
+          "id": "BooksBookPage",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "viewName": "books.ext.main.view.Book",
+              "contextPath": "/Books"
+            }
+          }
+        },
+        "BooksAuthorPage": {
+          "type": "Component",
+          "id": "BooksAuthorPage",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "viewName": "books.ext.main.view.Author",
+              "contextPath": "/Authors"
+            }
+          }
+        }
+      }
+    }
+  }
+}

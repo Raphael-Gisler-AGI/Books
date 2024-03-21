@@ -1,0 +1,26 @@
+<mvc:View
+    controllerName="basicbooks.controller.Book"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="{title}">
+        <subHeader>
+            <Toolbar>
+                <Text text="{pages}" />
+            </Toolbar>
+        </subHeader>
+        <Panel>
+            <Table items="{to_author/to_books}">
+                <columns>
+                    <Column>
+                        <Text text="Title" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <Text text="{title}" />
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
+    </Page>
+</mvc:View>

@@ -1,0 +1,8 @@
+<mvc:View
+	controllerName="basicbooks.controller.CreateBook"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+    <Page title="Create Book">
+        <Button text="Create" press=".onPressCreate" />
+    </Page>
+</mvc:View>

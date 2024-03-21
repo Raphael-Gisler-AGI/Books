@@ -1,0 +1,67 @@
+<mvc:View
+    controllerName="basicbooks.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="Books">
+        <subHeader>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button
+                    press=".onPressEdit"
+                    visible="{= !${ui>/editActive}}"
+                    icon="sap-icon://edit"
+                    text="Edit" />
+                <Button
+                    press=".onDeleteFields"
+                    visible="{ui>/editActive}"
+                    type="Critical"
+                    icon="sap-icon://delete"
+                    text="Delete" />
+                <Button
+                    press=".onAddField"
+                    visible="{ui>/editActive}"
+                    type="Success"
+                    icon="sap-icon://add"
+                    text="Add" />
+                <ToolbarSeparator visible="{ui>/editActive}" />
+                <Button
+                    press=".onPressCancel"
+                    visible="{ui>/editActive}"
+                    icon="sap-icon://cancel"
+                    text="Cancel" />
+                <Button
+                    press=".onPressSave"
+                    visible="{ui>/editActive}"
+                    type="Emphasized"
+                    icon="sap-icon://save"
+                    text="Save" />
+            </Toolbar>
+        </subHeader>
+        <Table
+            mode="{= ${ui>/editActive} ? 'MultiSelect' : 'None'}"
+            id="booksTable"
+            items="{/Books}">
+            <columns>
+                <Column>
+                    <Text text="Title" />
+                </Column>
+                <Column>
+                    <Text text="Pages" />
+                </Column>
+                <Column>
+                    <Text text="Author" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem
+                    id="normalModeTemplate"
+                    press=".onPressBook"
+                    type="Navigation">
+                    <Text text="{title}" />
+                    <Text text="{pages}" />
+                    <Text text="{to_author/name}" />
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

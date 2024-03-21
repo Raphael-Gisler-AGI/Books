@@ -1,0 +1,23 @@
+<mvc:XMLView
+    controllerName="books.ext.main.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:macros="sap.fe.macros">
+    <Page title="Books">
+        <subHeader>
+            <OverflowToolbar>
+                <Button
+                    press=".onPressNavAuthors"
+                    text="Authors" />
+            </OverflowToolbar>
+        </subHeader>
+        <content>
+            <Panel>
+                <macros:Table
+                    metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+                    readOnly="false"
+                    personalization="false" />
+            </Panel>
+        </content>
+    </Page>
+</mvc:XMLView>

@@ -1,0 +1,138 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "basicbooks",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.12.5",
+      "toolsId": "4b1beead-1364-485d-af9c-5ba7531e21ae"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.121.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "basicbooks.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "basicbooks.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false,
+        "transition": "slide"
+      },
+      "routes": [
+        {
+          "name": "RouteMain",
+          "pattern": ":?query:",
+          "target": [
+            "TargetMain"
+          ]
+        },
+        {
+          "name": "RouteBook",
+          "pattern": "Books({bookKey}):?query:",
+          "target": [
+            "TargetBook"
+          ]
+        },
+        {
+          "name": "RouteCreateBook",
+          "pattern": "CreateBook:?query:",
+          "target": [
+            "TargetCreateBook"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "TargetBook": {
+          "viewId": "Book",
+          "viewName": "Book"
+        },
+        "TargetCreateBook": {
+          "viewId": "CreateBook",
+          "viewName": "CreateBook"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "basicbooks.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

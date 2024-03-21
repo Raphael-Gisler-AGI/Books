@@ -1,0 +1,26 @@
+<mvc:XMLView
+    controllerName="books.ext.main.controller.Authors"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:macros="sap.fe.macros">
+    <Page title="Authors">
+        <subHeader>
+            <OverflowToolbar>
+                <Button
+                    press=".onPressNavBooks"
+                    text="Books" />
+            </OverflowToolbar>
+        </subHeader>
+        <content>
+            <Panel>
+                <macros:FilterBar
+                    id="FilterBar"
+                    liveMode="true"
+                    metaPath="@com.sap.vocabularies.UI.v1.SelectionFields" />
+                <macros:Table
+                    metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+                    filterBar="FilterBar" />
+            </Panel>
+        </content>
+    </Page>
+</mvc:XMLView>
