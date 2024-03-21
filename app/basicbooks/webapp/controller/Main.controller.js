@@ -6,14 +6,18 @@ sap.ui.define(
     "sap/m/Input",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
+    "sap/m/Select",
+	"sap/ui/core/Item",
   ],
   function (
     BaseController,
-    JSONModel,
-    ColumnListItem,
-    Input,
-    MessageBox,
-    MessageToast
+	JSONModel,
+	ColumnListItem,
+	Input,
+	MessageBox,
+	MessageToast,
+	Select,
+	Item
   ) {
     "use strict";
 
@@ -28,6 +32,18 @@ sap.ui.define(
               type: "Number",
               value: "{pages}",
             }),
+            new Select({
+              selectedKey: "{to_author_ID}",
+              forceSelection: false,
+              items: {
+                path: "/Authors",
+                templateShareable: true,
+                template: new Item({
+                  text: "{name}",
+                  key: "{ID}"
+                })
+              },
+            })
           ],
         });
         this.getView().setModel(
@@ -54,6 +70,19 @@ sap.ui.define(
       },
       async onPressSave() {
         await this.getModel().submitBatch("books");
+        const messageManager = sap.ui.getCore().getMessageManager();
+        const errors = messageManager.getMessageModel().getData();
+        let errorMessage = "";
+        errors.forEach((error) => {
+          if (error.type !== "Error") return;
+          errorMessage += `${error.message}\n`;
+        });
+        messageManager.removeAllMessages();
+        if (errorMessage) {
+          MessageBox.error(errorMessage);
+          return;
+        }
+
         this._toggleEditMode();
         this._bindTable("normalTemplate");
         this._resetEditedBooks();
