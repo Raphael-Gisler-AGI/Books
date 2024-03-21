@@ -75,13 +75,17 @@ sap.ui.define(
             title: `Delete Book${multiple}`,
             actions: [MessageBox.Action.YES, MessageBox.Action.NO],
             emphasizedAction: MessageBox.Action.YES,
-            onClose: (oAction) => {
-              if (oAction === MessageBox.Action.YES) {
-                debugger;
-              }
-            },
+            onClose: (oAction) => this._handleDelete(oAction, selectedItems),
           }
         );
+      },
+      _handleDelete(oAction, selectedItems) {
+        if (oAction !== MessageBox.Action.YES) {
+          return;
+        }
+        for (const selectedItem of selectedItems) {
+          selectedItem.getBindingContext().delete();
+        }
       },
       _toggleEditMode() {
         const ui = this.getView().getModel("ui");
